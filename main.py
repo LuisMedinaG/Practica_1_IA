@@ -25,6 +25,8 @@ class Environment():
     def createCustom(self):
         self.width = 3
         self.height = 3
+        self.x = 0
+        self.y = 0
         cont = 0
 
         while cont == 0:
@@ -32,16 +34,17 @@ class Environment():
             print("¿Cuáles valores quieres modificar?")
             print("**Si no modificas el tamaño será de 3x3 por default. Si no modificas la posición inicial, será (0,0) por default.**")
             print("")
-            print("/t 1) Tamaño")
-            print("/t 2) Posición inicial")
-            print("/t 3) Salir")
+            print("1) Tamaño")
+            print("2) Posición inicial")
+            print("3) Salir")
             opt = int(input())
-
+           
             if opt == 1:
                 while True:
                     try:
                         self.width = int(input("Ingrese la altura del ambiente: "))
-                        self.height = int(input("Ingrese la anchura  del ambiente: "))        
+                        self.height = int(input("Ingrese la anchura  del ambiente: "))                         
+                        break
                     except ValueError:
                         print("Solo enteros! intente de nuevo.")
                         continue
@@ -52,19 +55,24 @@ class Environment():
                     flag2 = True
                     
                     print("Ingrese la posición inicial de la aspiradora en: ")
-                    self.vacuum.x = int(input("X: "))
-                    if self.vacuum.x <= 0 or self.vacuum.x >= self.width:
+                    self.x = int(input("X: "))
+                    if self.x <= 0 or self.x >= self.width:
                         print('ERROR: Ingrese valores validos')
                         flag1 = False
 
-                    self.vacuum.y = int(input("Y: "))
-                    if self.vacuum.y <= 0 or self.vacuum.y >= self.width:
+                    self.y = int(input("Y: "))
+                    if self.y <= 0 or self.y >= self.width:
                         print('ERROR: Ingrese valores validos')
                         flag2 = False
 
                     if flag1 and flag2:
                         break
             if opt == 3:
+                self.vacuum = VacuumCleaner(self.width, self.height)
+                self.matrix = np.random.randint(0,2, size = (self.width, self.height))
+                self.vacuum.x = self.x
+                self.vacuum.y = self.y
+                self.matrix[self.x][self.y] = 4
                 cont = 1
                 break
 
@@ -111,10 +119,12 @@ def main():
     opt = menu()
     if opt == 1:
         env.createRandom()
-        print("Estes es tu nuevo ambiente: ")
+        print("Este es tu nuevo ambiente: ")
         print(env.matrix)
     elif opt == 2:
         env.createCustom()
+        print("Este es tu nuevo ambiente: ")
+        print(env.matrix)
 
 def menu():
     print("Bienvenido al entorno de aspiradora. Escoge una opción: ")

@@ -3,9 +3,9 @@ import vacuum
 
 def menu():
     print(
-        "Bienvenido al entorno de aspiradora. Escoge una opción: "
-        "\t 1. Ambiente aleatorio"
-        "\t 2. Ambiente personalizado"
+        "Bienvenido al entorno de aspiradora. Escoge una opción: \n"
+        "\t 1. Ambiente aleatorio\n"
+        "\t 2. Ambiente personalizado\n"
     )
 
     opt = int(input("Ingrese una opcion: "))
@@ -17,19 +17,18 @@ def menu():
 
 def main():
     # Declaramos un entorrno
-    environment = environment.Environment()
+    environ = environment.Environment()
 
     opt = menu()
     if opt == 1:
-        environment.createRandom()
+        environ.createRandom()
     else:
-        environment.createCustom()
-    print("Este es tu nuevo ambiente: ")
-    print(environment.matrix)
+        environ.createCustom()
 
-    vacuum = vacuum.VacuumCleaner()
-    vacuum.environment = environment
+    environ.matrix[environ.vacuum.x][environ.vacuum.y] = 4
 
+    print("Ambiente:")
+    print(environ.matrix)
 
 if __name__ == "__main__":
     main()

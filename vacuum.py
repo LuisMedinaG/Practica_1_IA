@@ -1,7 +1,7 @@
 
 import random
 
-class VacuumCleaner:
+class VacuumCleaner():
     def __init__(self, width, height):
         # Vacuum position
         self.x = random.randint(0, width)

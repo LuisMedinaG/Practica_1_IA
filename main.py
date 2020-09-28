@@ -1,6 +1,7 @@
 import environment
 import vacuum
 
+
 def menu():
     print(
         "Bienvenido al entorno de aspiradora. Escoge una opción: \n"
@@ -30,5 +31,7 @@ def main():
     print("Ambiente:")
     print(environ.matrix)
 
+
 if __name__ == "__main__":
+
     main()

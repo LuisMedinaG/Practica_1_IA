@@ -3,12 +3,14 @@ import prettytable
 import random
 import vacuum
 
+
 class Environment():
     def __init__(self):
-        self.width = 0
-        self.height = 0
-        self.vacuum = None
-        self.matrix = None
+        self.width = 0      # La anchura del entorno
+        self.height = 0     # La altura del entorno
+        self.matrix = None  # Los matriz que contiene donde hay suciedad
+        self.vacuum = None  # El entorno tiene un objeto aspiradora
+        # Objeto para dibujar el entorno en consola
         self.world = prettytable.PrettyTable(header=False)
 
     def createRandom(self):
@@ -30,7 +32,8 @@ class Environment():
         opt = 0
 
         while opt != 3:
-            print("¿Cuáles valores quieres modificar?"
+            print(
+                "¿Cuáles valores quieres modificar?"
                 "\n**Si no modificas el tamaño será de 3x3 por default. "
                 "Si no modificas la posición inicial, será (0,0) por default.**"
                 "\n1) Tamaño"
@@ -41,8 +44,10 @@ class Environment():
             if opt == 1:
                 while True:
                     try:
-                        self.width = int(input("Ingrese la altura del ambiente: "))
-                        self.height = int(input("Ingrese la anchura  del ambiente: "))
+                        self.width = int(
+                            input("Ingrese la altura del ambiente: "))
+                        self.height = int(
+                            input("Ingrese la anchura  del ambiente: "))
                         break
                     except ValueError:
                         print("Solo enteros! intente de nuevo.")
@@ -54,13 +59,13 @@ class Environment():
                     flag2 = True
 
                     print("Ingrese la posición inicial de la aspiradora en: ")
-                    
+
                     x = int(input("X: "))
                     if x < 0 or x >= self.width:
                         print("ERROR: Ingrese valores validos")
                         flag1 = False
                         continue
-                    
+
                     y = int(input("Y: "))
                     if y < 0 or y >= self.width:
                         print("ERROR: Ingrese valores validos")

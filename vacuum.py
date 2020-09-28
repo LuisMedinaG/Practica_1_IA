@@ -1,5 +1,5 @@
-
 import random
+
 
 class VacuumCleaner():
     def __init__(self, width, height):
@@ -13,9 +13,11 @@ class VacuumCleaner():
         self.dirtDetected = 0
 
         # Vacuum sensors
-        self.sensors = {"up": False, "down": False, "left": True, "right": True}
-
-        self.environment = None
+        self.sensors = {
+            "up": False,
+            "down": False,
+            "left": True,
+            "right": True}
 
     def createAgent(self):
         pass

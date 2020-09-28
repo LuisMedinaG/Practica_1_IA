@@ -4,8 +4,8 @@ import random
 class VacuumCleaner():
     def __init__(self, width, height):
         # Vacuum position
-        self.x = random.randint(0, width)
-        self.y = random.randint(0, height)
+        self.x = random.randint(0, width - 1)
+        self.y = random.randint(0, height - 1)
 
         # Vacuum preformance
         self.energyUsed = 0

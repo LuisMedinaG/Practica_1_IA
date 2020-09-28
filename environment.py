@@ -17,8 +17,6 @@ class Environment():
         self.width = random.randint(1, 10)
         self.height = random.randint(1, 10)
         self.vacuum = vacuum.VacuumCleaner(self.width, self.height)
-        self.vacuum.x = random.randint(0, self.width - 1)
-        self.vacuum.y = random.randint(0, self.height - 1)
         self.matrix = np.random.randint(2, size=(self.width, self.height))
 
         for row in self.matrix:

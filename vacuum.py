@@ -8,34 +8,32 @@ class VacuumCleaner():
         self.y = random.randint(0, height - 1)
 
         # Vacuum preformance
-        self.energyUsed = 0
-        self.sensorIterations = 0
-        self.dirtDetected = 0
+        self.moves = 0
 
-        # Vacuum sensors
-        self.sensors = {
-            "up": False,
-            "down": False,
-            "left": True,
-            "right": True}
+    def detectDirt(self, matrix):
+        return matrix[self.x, self.y] == 1
 
-    def createAgent(self):
-        pass
+    def cleanDirt(self, matrix):
+        matrix[self.x, self.y] = 0
+        self.dirt += 1
 
     def moveRight(self):
-        pass
+        self.x += 1
+        self.moves += 1
 
     def moveLeft(self):
-        pass
+        self.x -= 1
+        self.moves += 1
 
-    def moveUp(self):
-        pass
+    def performance(self):
+        # puntos sucios/bloques caminados del ambiente * 100 = 34% de los bloqus recorridos eran sucios
+        return self.dirt / self.moves * 100
+    
+    def performancePenalized(self):
+        return  self.dirt - self.moves
+                
+#    def moveUp(self):
+#        pass
 
-    def moveDown(self):
-        pass
-
-    def cleanDirt(self):
-        pass
-
-    def detectDirt(self):
-        pass
+#    def moveDown(self):
+#        pass

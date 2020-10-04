@@ -6,8 +6,10 @@ import vacuum
 
 class Environment():
     def __init__(self):
-        self.width = 0      # La anchura del entorno
-        self.height = 0     # La altura del entorno
+        # Default to a 1x2 random world
+        self.width = 2      # La anchura del entorno
+        self.height = 1     # La altura del entorno
+        # Each cell can be dirty or clean
         self.matrix = None  # Los matriz que contiene donde hay suciedad
         self.vacuum = None  # El entorno tiene un objeto aspiradora
         # Objeto para dibujar el entorno en consola
@@ -15,7 +17,7 @@ class Environment():
 
     def createRandom(self):
         self.width = random.randint(1, 10)
-        self.height = random.randint(1, 10)
+        # self.height = random.randint(1, 1)
         self.vacuum = vacuum.VacuumCleaner(self.width, self.height)
         self.matrix = np.random.randint(2, size=(self.width, self.height))
 
@@ -23,8 +25,6 @@ class Environment():
             self.world.add_row(row)
 
     def createCustom(self):
-        self.width = 3
-        self.height = 3
         x = 0
         y = 0
         opt = 0
@@ -82,3 +82,30 @@ class Environment():
 
         for row in self.matrix:
             self.world.add_row(row)
+
+    def clean(self):
+        toRight = True
+        while True:
+            prevX = self.vacuum.x
+            prevY = self.vacuum.y
+            
+            if self.matrix[self.vacuum.x, self.vacuum.y] == 1:
+                self.vacuum.cleanDirt(matrix)
+        
+            if toRight:
+                if self.vacuum.x == self.width - 1:
+                    toRight = False 
+                else:
+                    self.vacuum.moveRight()
+            else:
+                if self.vacuum.x == 0:
+                    break
+                
+                self.vacuum.moveLeft()
+
+            update(prevX, prevY)
+
+    def update(self,prevX,prevY):
+        self.matrix[prevX,prevY] = 0
+        self.matrix[self.vacuum.x, self.vacuum.y] = 4
+        print(self.matrix)

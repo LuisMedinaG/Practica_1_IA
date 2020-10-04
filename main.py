@@ -27,9 +27,9 @@ def main():
         environ.createCustom()
 
     environ.matrix[environ.vacuum.x][environ.vacuum.y] = 4
-
-    print("Ambiente:")
-    print(environ.matrix)
+    
+    environ.clean()
+    print(environ.vacuum.performance)
 
 
 if __name__ == "__main__":

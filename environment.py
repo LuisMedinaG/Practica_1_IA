@@ -16,13 +16,14 @@ class Environment():
         self.world = prettytable.PrettyTable(header=False)
 
     def createRandom(self):
-        self.width = random.randint(1, 10)
+        # self.width = random.randint(1, 10)
         # self.height = random.randint(1, 1)
         self.vacuum = vacuum.VacuumCleaner(self.width, self.height)
-        self.matrix = np.random.randint(2, size=(self.width, self.height))
+        self.matrix = np.random.randint(2, size=(self.height, self.width))
 
-        for row in self.matrix:
-            self.world.add_row(row)
+        # for row in self.matrix:
+        #     self.world.add_row(row)
+
 
     def createCustom(self):
         x = 0
@@ -83,14 +84,30 @@ class Environment():
         for row in self.matrix:
             self.world.add_row(row)
 
+    
+    def update(self, prevX, prevY):
+        # self.matrix[prevX,prevY] = 0
+        # self.matrix[self.vacuum.x, self.vacuum.y] = 4
+
+        line = f" {'-' * self.width * 4}\n|" 
+        for i, row in enumerate(self.matrix):
+            for j, col in enumerate(row):
+                if j == self.vacuum.x and i ==self.vacuum.y:  
+                    line += f' X-{col} |'         
+                else:
+                    line += f' {col} |'         
+            line += '\n ' + '-' * self.width * 4
+        print(line + '\n')
+        
+        
     def clean(self):
         toRight = True
         while True:
             prevX = self.vacuum.x
             prevY = self.vacuum.y
             
-            if self.matrix[self.vacuum.x, self.vacuum.y] == 1:
-                self.vacuum.cleanDirt(matrix)
+            if self.matrix[self.vacuum.y][self.vacuum.x] == 1:
+                self.vacuum.cleanDirt(self.matrix)
         
             if toRight:
                 if self.vacuum.x == self.width - 1:
@@ -100,12 +117,6 @@ class Environment():
             else:
                 if self.vacuum.x == 0:
                     break
-                
                 self.vacuum.moveLeft()
 
-            update(prevX, prevY)
-
-    def update(self,prevX,prevY):
-        self.matrix[prevX,prevY] = 0
-        self.matrix[self.vacuum.x, self.vacuum.y] = 4
-        print(self.matrix)
+            self.update(prevX, prevY)

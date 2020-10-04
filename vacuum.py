@@ -9,12 +9,13 @@ class VacuumCleaner():
 
         # Vacuum preformance
         self.moves = 0
+        self.dirt  = 0
 
     def detectDirt(self, matrix):
-        return matrix[self.x, self.y] == 1
+        return matrix[self.y][self.x] == 1
 
     def cleanDirt(self, matrix):
-        matrix[self.x, self.y] = 0
+        matrix[self.y][self.x] = 0
         self.dirt += 1
 
     def moveRight(self):
@@ -27,11 +28,18 @@ class VacuumCleaner():
 
     def performance(self):
         # puntos sucios/bloques caminados del ambiente * 100 = 34% de los bloqus recorridos eran sucios
-        return self.dirt / self.moves * 100
+        print(self.moves)
+        print(self.dirt)
+
+        if self.moves <= 0:
+            return self.dirt / 1 * 100
+        else:
+            return self.dirt / self.moves * 100
     
     def performancePenalized(self):
         return  self.dirt - self.moves
                 
+
 #    def moveUp(self):
 #        pass
 

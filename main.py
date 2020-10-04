@@ -25,11 +25,10 @@ def main():
         environ.createRandom()
     else:
         environ.createCustom()
-
-    environ.matrix[environ.vacuum.x][environ.vacuum.y] = 4
     
     environ.clean()
-    print(environ.vacuum.performance)
+    performance = environ.vacuum.performance()
+    print(f'Performance: {performance}')
 
 
 if __name__ == "__main__":
